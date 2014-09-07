@@ -4,6 +4,7 @@ class board:
     def __init__(self,x,y,randomize=True):
         self.xdim = x
         self.ydim = y
+        self.offset = 1
         self.board = n.zeros((x+2,y+2),dtype=int)
         if randomize: self.randomize()
 
@@ -21,7 +22,7 @@ class board:
     def rule(self,x,y):
         neighbors = self.numNeighbors(x,y)
         if neighbors==3: return 1
-        elif self.board[x][y]==1 and neighbors==2: return 1
+        elif neighbors==2: return self.board[x][y]
         else: return 0
 
     def iterate(self):
@@ -33,8 +34,8 @@ class board:
 
     def isAlive(self,i,j):
         if i>self.xdim or j>self.ydim: return 0
-        if i<1 or j<1: return 0
-        return self.board[i+1][j+1]
+        if i<self.offset or j<self.offset: return 0
+        return self.board[i+self.offset][j+self.offset]
 
     def switch(self,j,i):
         i+=1
