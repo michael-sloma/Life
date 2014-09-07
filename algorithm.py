@@ -34,3 +34,12 @@ class board:
         if i>self.xdim or j>self.ydim: return 0
         if i<1 or j<1: return 0
         return self.board[i+1][j+1]
+
+    def switch(self,j,i):
+        i+=1
+        j+=1 #correct for offset
+        if (self.xdim > i > 0) and (self.ydim > j > 0):
+            current = self.board[i][j]
+            if current==1: self.board[i][j] = 0
+            elif current==0: self.board[i][j] = 1
+            else: raise AssertionError
