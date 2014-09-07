@@ -19,9 +19,10 @@ class board:
                                      if not (a==x and b==y)])
 
     def rule(self,x,y):
-        if 4 > self.numNeighbors(x,y) > 2: 
-            return 1
-        return 0
+        neighbors = self.numNeighbors(x,y)
+        if neighbors==3: return 1
+        elif self.board[x][y]==1 and neighbors==2: return 1
+        else: return 0
 
     def iterate(self):
         nextBoard = n.zeros((self.xdim+2,self.ydim+2),dtype=int)
